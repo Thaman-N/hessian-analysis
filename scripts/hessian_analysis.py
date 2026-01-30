@@ -242,10 +242,20 @@ def analyze_hessian_spectrum(generation=0, compute_density=False):
     # Calculate key metrics
     max_eigenval = float(np.max(eigenvals))
     
-    # Handle empty bulk
+    # Handle empty bulk - Robust IQR Method
     if len(full_eigenvals) > 1:
-        bulk_center = float(np.mean(full_eigenvals[full_eigenvals < np.percentile(full_eigenvals, 95)]))
-        bulk_width = float(np.std(full_eigenvals[full_eigenvals < np.percentile(full_eigenvals, 95)]))
+        # Calculate percentiles
+        q1 = np.percentile(full_eigenvals, 25)
+        q3 = np.percentile(full_eigenvals, 75)
+        iqr = q3 - q1
+        
+        # New Definitions
+        # Center: Median (50th percentile) is more robust than Mean
+        bulk_center = float(np.median(full_eigenvals))
+        
+        # Width: IQR is the standard robust measure of spread
+        # (Note: For normal dist, IQR approx 1.35 * sigma)
+        bulk_width = float(iqr)
     else:
         bulk_center = float('nan')
         bulk_width = float('nan')
