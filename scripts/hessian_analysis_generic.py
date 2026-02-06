@@ -119,7 +119,7 @@ def analyze_model(model_path, generation, output_dir):
     
     try:
         # iter=20 is a good balance for Control groups
-        density_eigen, density_weight = hessian_comp.density(iter=20)
+        density_eigen, density_weight = hessian_comp.density(iter=30)
         
         x = np.array(density_eigen).flatten().astype(float)
         y = np.array(density_weight).flatten().astype(float)
