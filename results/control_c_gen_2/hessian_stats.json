@@ -1,0 +1,12 @@
+{
+    "generation": 2,
+    "spectral_ratio": 0.0,
+    "bulk_width_iqr": 0.0,
+    "top_eigenvalues": [
+        -2609.48486328125,
+        -1719.5533447265625,
+        -1287.5655517578125
+    ],
+    "plot_x": [],
+    "plot_y": []
+}

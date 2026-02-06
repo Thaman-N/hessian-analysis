@@ -13,6 +13,7 @@ import sys
 
 # --- CONFIG ---
 MAX_LENGTH = 256
+os.environ["PYTORCH_ALLOC_CONF"] = "expandable_segments:True"
 
 # Monkey Patch for PyHessian (Fixes PyTorch compatibility)
 def patched_eig(input, eigenvectors=False, out=None):
@@ -41,6 +42,12 @@ def criterion(outputs, targets):
         targets[..., 1:].contiguous().view(-1)
     )
 
+def clear_grad_and_reset(model):
+    """Clear gradients and reset to None to break reference cycles"""
+    for param in model.parameters():
+        if param.grad is not None:
+            param.grad = None
+
 def analyze_model(model_path, generation, output_dir):
     print(f"🔬 Hessian Analysis: {model_path}")
     
@@ -54,7 +61,7 @@ def analyze_model(model_path, generation, output_dir):
         print("   Loading model in float32 (for stability)...")
         model = AutoModelForCausalLM.from_pretrained(
             model_path, 
-            torch_dtype=torch.float32,   # <--- BACK TO FP32 TO FIX NANs
+            dtype=torch.float32,   # <--- FIXED DEPRECATION WARNING
             attn_implementation="eager"  # <--- YOUR SDPA FIX
         ).to(device)
         model.eval()
@@ -96,6 +103,9 @@ def analyze_model(model_path, generation, output_dir):
     try:
         top_eigenvalues, _ = hessian_comp.eigenvalues(top_n=3)
         clean_top = [float(x.item()) if torch.is_tensor(x) else float(x) for x in top_eigenvalues]
+        
+        # CRITICAL: Clear gradients to break reference cycle
+        clear_grad_and_reset(model)
         torch.cuda.empty_cache() # Flush immediately
     except RuntimeError as e:
         print(f"⚠️ Failed Top Eigs: {e}")
@@ -125,6 +135,10 @@ def analyze_model(model_path, generation, output_dir):
         ratio = max_lambda / iqr if iqr > 1e-6 else 0.0
         
         print(f"📊 Gen {generation} Result: Ratio {ratio:.0f} | IQR {iqr:.4f}")
+
+        # CRITICAL: Clear gradients again
+        clear_grad_and_reset(model)
+        torch.cuda.empty_cache()
 
     except Exception as e:
         print(f"⚠️ Error in Density Calc: {e}")
