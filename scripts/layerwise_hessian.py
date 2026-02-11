@@ -275,7 +275,7 @@ def get_layer_groups(model):
             'attention': ['self_attn.q_proj', 'self_attn.k_proj', 
                          'self_attn.v_proj', 'self_attn.o_proj'],
             'mlp': ['mlp.gate_proj', 'mlp.up_proj', 'mlp.down_proj'],
-            'output': ['embed_tokens'] if getattr(model.config, 'tie_word_embeddings', False) else ['lm_head']
+            'output': ['lm_head']
         }
     
     elif model_type == 'qwen2':
@@ -319,7 +319,7 @@ def make_param_filter(model, keywords):
 # Main Analysis
 # ============================================================================
 
-def analyze_layerwise(model_path, output_dir, num_batches=5, num_eigenthings=20, device='auto'):
+def analyze_layerwise(model_path, output_dir, num_batches=5, num_eigenthings=20, device='auto', disable_flash_attn=False):
     """
     Run layer-wise Hessian analysis.
     
@@ -329,6 +329,7 @@ def analyze_layerwise(model_path, output_dir, num_batches=5, num_eigenthings=20,
         num_batches: Number of batches for Hessian computation (default: 5)
         num_eigenthings: Number of top eigenvalues to compute
         device: Device to use - 'auto', 'cuda', or 'cpu' (default: 'auto')
+        disable_flash_attn: Force standard attention instead of Flash Attention
     """
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -340,10 +341,21 @@ def analyze_layerwise(model_path, output_dir, num_batches=5, num_eigenthings=20,
     print(f"Using device: {device}")
     if device == 'cpu':
         print("⚠️  CPU MODE - This will be SLOW but stable")
+        print("⚠️  Disabling Flash Attention (not supported on CPU)")
+        disable_flash_attn = True  # Always disable for CPU
+    elif disable_flash_attn:
+        print("⚠️  Flash Attention DISABLED - using standard attention")
     
     # Load model
     print(f"\n📦 Loading model: {model_path}")
-    model = AutoModelForCausalLM.from_pretrained(model_path, torch_dtype=torch.float32)
+    
+    # Configure model loading
+    model_kwargs = {'torch_dtype': torch.float32}
+    if disable_flash_attn:
+        model_kwargs['attn_implementation'] = 'eager'  # Use standard attention
+        print("   Using attn_implementation='eager'")
+    
+    model = AutoModelForCausalLM.from_pretrained(model_path, **model_kwargs)
     model = model.to(device)
     model.eval()
     
@@ -556,6 +568,11 @@ if __name__ == "__main__":
         choices=['auto', 'cuda', 'cpu'],
         help='Device to use: auto (cuda if available), cuda, or cpu (default: auto)'
     )
+    parser.add_argument(
+        '--disable_flash_attn',
+        action='store_true',
+        help='Disable Flash Attention (use standard attention instead). Automatically enabled for CPU.'
+    )
     
     args = parser.parse_args()
     
@@ -564,5 +581,6 @@ if __name__ == "__main__":
         output_dir=args.output_dir,
         num_batches=args.num_batches,
         num_eigenthings=args.num_eigenthings,
-        device=args.device
+        device=args.device,
+        disable_flash_attn=args.disable_flash_attn
     )
