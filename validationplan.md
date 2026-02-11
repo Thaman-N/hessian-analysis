@@ -122,22 +122,24 @@ tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-0.5B")
 ```
 Experimental Conditions (5 generations each):
 
-TREATMENT: Recursive Synthetic Data
+TREATMENT: Recursive Synthetic Data (SmolLM2-135M)
 Gen 0 → Synthetic Data 1 → Gen 1 → Synthetic Data 2 → Gen 2 → ...
 
-CONTROL A: Fresh Human Data  
+CONTROL A: Fresh Human Data (SmolLM2-135M)
 Gen 0 → Fresh Human 1 → Gen 1A → Fresh Human 2 → Gen 2A → ...
 
-CONTROL B: Mixed Data (50/50)
-Gen 0 → Mixed 1 → Gen 1B → Mixed 2 → Gen 2B → ...
+CONTROL B: Static Human Data (SmolLM2-135M)
+Gen 0 → Same Human Data → Gen 1B → Same Human Data → Gen 2B → ...
+(Same 50K samples repeated each generation to test overfitting vs recursion)
 
-CONTROL C: Different Scales
-- Treatment with 1K, 5K, 10K samples per generation
+CONTROL C: Architecture Test (Qwen 0.5B - Recursive)
+Gen 0 → Synthetic Data 1 → Gen 1 → Synthetic Data 2 → Gen 2 → ...
+(Tests if spectral collapse generalizes to larger production models - 50K samples/gen)
 ```
 
 #### **Statistical Rigor Protocol**
 - **Replications**: 5 runs per condition (different random seeds)
-- **Sample size**: 10,000 samples per generation
+- **Sample size**: 50,000 samples per generation
 - **Training steps**: 2,000 steps per generation (proper convergence)
 - **Significance testing**: ANOVA across conditions, post-hoc t-tests
 - **Effect size**: Cohen's d for practical significance
