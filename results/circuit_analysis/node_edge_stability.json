@@ -1,0 +1,42 @@
+{
+  "GPT2": {
+    "1": {
+      "node_mean_cosine_sim": 0.9999988875869248,
+      "edge_mean_drift": 0.0032946914117895523,
+      "n_nodes": 576,
+      "n_edges": 1584
+    },
+    "3": {
+      "node_mean_cosine_sim": 0.9999991740203567,
+      "edge_mean_drift": 0.003192852540866115,
+      "n_nodes": 576,
+      "n_edges": 1584
+    },
+    "5": {
+      "node_mean_cosine_sim": 0.9999993634927604,
+      "edge_mean_drift": 0.0031452476869676524,
+      "n_nodes": 576,
+      "n_edges": 1584
+    }
+  },
+  "Pythia": {
+    "1": {
+      "node_mean_cosine_sim": 0.9999994999573877,
+      "edge_mean_drift": 0.001428218470153074,
+      "n_nodes": 1536,
+      "n_edges": 5888
+    },
+    "3": {
+      "node_mean_cosine_sim": 0.9999994238217672,
+      "edge_mean_drift": 0.0017298641791297798,
+      "n_nodes": 1536,
+      "n_edges": 5888
+    },
+    "5": {
+      "node_mean_cosine_sim": 0.9999991427951803,
+      "edge_mean_drift": 0.0025837639131624586,
+      "n_nodes": 1536,
+      "n_edges": 5888
+    }
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "GPT2": {
+    "baseline_gen0_ppl": 58.2772138595581,
+    "baseline_gen5_ppl": 1420.7181060791015,
+    "layers": {
+      "0": {
+        "recovery": 0.0,
+        "restored_count": 0,
+        "total_failures": 15,
+        "patched_ppl": 1.0
+      },
+      "1": {
+        "recovery": 0.0,
+        "restored_count": 0,
+        "total_failures": 15,
+        "patched_ppl": 1.0
+      },
+      "2": {
+        "recovery": 0.0,
+        "restored_count": 0,
+        "total_failures": 15,
+        "patched_ppl": 1.0
+      },
+      "3": {
+        "recovery": 0.0,
+        "restored_count": 0,
+        "total_failures": 15,
+        "patched_ppl": 1.0
+      },
+      "4": {
+        "recovery": 0.0,
+        "restored_count": 0,
+        "total_failures": 15,
+        "patched_ppl": 1.0
+      },
+      "5": {
+        "recovery": 0.0,
+        "restored_count": 0,
+        "total_failures": 15,
+        "patched_ppl": 1.0
+      },
+      "6": {
+        "recovery": 0.0,
+        "restored_count": 0,
+        "total_failures": 15,
+        "patched_ppl": 1.0
+      },
+      "7": {
+        "recovery": 0.0,
+        "restored_count": 0,
+        "total_failures": 15,
+        "patched_ppl": 1.0
+      },
+      "8": {
+        "recovery": 0.0,
+        "restored_count": 0,
+        "total_failures": 15,
+        "patched_ppl": 1.0
+      },
+      "9": {
+        "recovery": 0.0,
+        "restored_count": 0,
+        "total_failures": 15,
+        "patched_ppl": 1.0
+      },
+      "10": {
+        "recovery": 0.3333333333333333,
+        "restored_count": 5,
+        "total_failures": 15,
+        "patched_ppl": 0.6666666666666667
+      },
+      "11": {
+        "recovery": 0.6666666666666666,
+        "restored_count": 10,
+        "total_failures": 15,
+        "patched_ppl": 0.33333333333333337
+      }
+    }
+  },
+  "Pythia": {
+    "baseline_gen0_ppl": 31.91953296661377,
+    "baseline_gen5_ppl": 149.13191356658936,
+    "layers": {
+      "0": {
+        "recovery": 0.3333333333333333,
+        "restored_count": 10,
+        "total_failures": 30,
+        "patched_ppl": 0.6666666666666667
+      },
+      "1": {
+        "recovery": 0.3333333333333333,
+        "restored_count": 10,
+        "total_failures": 30,
+        "patched_ppl": 0.6666666666666667
+      },
+      "2": {
+        "recovery": 0.16666666666666666,
+        "restored_count": 5,
+        "total_failures": 30,
+        "patched_ppl": 0.8333333333333334
+      },
+      "3": {
+        "recovery": 0.3333333333333333,
+        "restored_count": 10,
+        "total_failures": 30,
+        "patched_ppl": 0.6666666666666667
+      },
+      "4": {
+        "recovery": 0.3333333333333333,
+        "restored_count": 10,
+        "total_failures": 30,
+        "patched_ppl": 0.6666666666666667
+      },
+      "5": {
+        "recovery": 0.3333333333333333,
+        "restored_count": 10,
+        "total_failures": 30,
+        "patched_ppl": 0.6666666666666667
+      },
+      "6": {
+        "recovery": 0.3333333333333333,
+        "restored_count": 10,
+        "total_failures": 30,
+        "patched_ppl": 0.6666666666666667
+      },
+      "7": {
+        "recovery": 0.3333333333333333,
+        "restored_count": 10,
+        "total_failures": 30,
+        "patched_ppl": 0.6666666666666667
+      },
+      "8": {
+        "recovery": 0.3333333333333333,
+        "restored_count": 10,
+        "total_failures": 30,
+        "patched_ppl": 0.6666666666666667
+      },
+      "9": {
+        "recovery": 0.3333333333333333,
+        "restored_count": 10,
+        "total_failures": 30,
+        "patched_ppl": 0.6666666666666667
+      },
+      "10": {
+        "recovery": 0.3333333333333333,
+        "restored_count": 10,
+        "total_failures": 30,
+        "patched_ppl": 0.6666666666666667
+      },
+      "11": {
+        "recovery": 0.16666666666666666,
+        "restored_count": 5,
+        "total_failures": 30,
+        "patched_ppl": 0.8333333333333334
+      },
+      "12": {
+        "recovery": 0.16666666666666666,
+        "restored_count": 5,
+        "total_failures": 30,
+        "patched_ppl": 0.8333333333333334
+      },
+      "13": {
+        "recovery": 0.16666666666666666,
+        "restored_count": 5,
+        "total_failures": 30,
+        "patched_ppl": 0.8333333333333334
+      },
+      "14": {
+        "recovery": 0.16666666666666666,
+        "restored_count": 5,
+        "total_failures": 30,
+        "patched_ppl": 0.8333333333333334
+      },
+      "15": {
+        "recovery": 0.16666666666666666,
+        "restored_count": 5,
+        "total_failures": 30,
+        "patched_ppl": 0.8333333333333334
+      },
+      "16": {
+        "recovery": 0.16666666666666666,
+        "restored_count": 5,
+        "total_failures": 30,
+        "patched_ppl": 0.8333333333333334
+      },
+      "17": {
+        "recovery": 0.16666666666666666,
+        "restored_count": 5,
+        "total_failures": 30,
+        "patched_ppl": 0.8333333333333334
+      },
+      "18": {
+        "recovery": 0.3333333333333333,
+        "restored_count": 10,
+        "total_failures": 30,
+        "patched_ppl": 0.6666666666666667
+      },
+      "19": {
+        "recovery": 0.8333333333333334,
+        "restored_count": 25,
+        "total_failures": 30,
+        "patched_ppl": 0.16666666666666663
+      },
+      "20": {
+        "recovery": 0.8333333333333334,
+        "restored_count": 25,
+        "total_failures": 30,
+        "patched_ppl": 0.16666666666666663
+      },
+      "21": {
+        "recovery": 0.8333333333333334,
+        "restored_count": 25,
+        "total_failures": 30,
+        "patched_ppl": 0.16666666666666663
+      },
+      "22": {
+        "recovery": 1.0,
+        "restored_count": 30,
+        "total_failures": 30,
+        "patched_ppl": 0.0
+      },
+      "23": {
+        "recovery": 1.0,
+        "restored_count": 30,
+        "total_failures": 30,
+        "patched_ppl": 0.0
+      }
+    }
+  }
+}
